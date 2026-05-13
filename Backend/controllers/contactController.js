@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const Contact = require("../models/Contact"); // አዲሱን ሞዴል እዚህ ጋር ጥራው
+const Contact = require("../models/Contact");
 
 const saveContact = async (req, res) => {
   const { fullName, email, mobile, subject, message } = req.body;
@@ -16,7 +16,21 @@ const saveContact = async (req, res) => {
     await newContact.save();
 
     // 2. Nodemailer transporter ማዘጋጀት
-    
+    // Render ላይ Port 465 እና secure: true መጠቀም አስተማማኝ ነው
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS, // እዚህ ጋር App Password መሆኑን እርግጠኛ ሁን
+      },
+      tls: {
+        // ይህ ግንኙነቱ በጊዜ ገደብ እንዳይቋረጥ (Timeout እንዳይሆን) ይረዳል
+        rejectUnauthorized: false,
+      },
+    });
 
     // 3. የኢሜይል ይዘት
     const mailOptions = {
@@ -43,10 +57,13 @@ const saveContact = async (req, res) => {
       message: "መልዕክትህ በተሳካ ሁኔታ ተቀምጧል፣ ኢሜይልም ደርሶኛል!",
     });
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error Details:", error);
+
+    // ዳታው MongoDB ላይ ሴቭ ሆኖ ኢሜይሉ ብቻ እምቢ ካለ ለተጠቃሚው ስህተት እንዳያሳይ ማድረግ ትችላለህ
     res.status(500).json({
       success: false,
       message: "ስህተት አጋጥሟል፣ እባክህ ድጋሚ ሞክር።",
+      error: error.message,
     });
   }
 };
