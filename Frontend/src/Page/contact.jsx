@@ -22,26 +22,28 @@ function Contact() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://myportfolio-9x7u.onrender.com/api/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await response.json();
 
       if (data.success) {
         // Success notification
-       toast.success("Message received, thank you! 📧", {
-  position: "top-right",
-  autoClose: 5000,
-  className: "custom-toast",
-  progressClassName: "custom-progress",
-});
+        toast.success("Message received, thank you! 📧", {
+          position: "top-right",
+          autoClose: 5000,
+          className: "custom-toast",
+          progressClassName: "custom-progress",
+        });
 
-        
         // Reset form
         setFormData({
           fullName: "",
