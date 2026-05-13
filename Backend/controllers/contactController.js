@@ -16,13 +16,7 @@ const saveContact = async (req, res) => {
     await newContact.save();
 
     // 2. Nodemailer transporter ማዘጋጀት
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+    
 
     // 3. የኢሜይል ይዘት
     const mailOptions = {
