@@ -29,6 +29,7 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
 *.sw?
 
 # OS metadata
