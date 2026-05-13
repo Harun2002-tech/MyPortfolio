@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { SiTiktok, SiTelegram, SiInstagram, SiYoutube } from "react-icons/si";
 import Typed from "typed.js";
-import HomePortrait from "../Components/image/home.png"; // ስሙን ወደ HomePortrait ቀይሬዋለሁ
+import HomePortrait from "../Components/image/Home.png";
 import CvFile from "../Components/image/kedir_cv.png";
 
 const Home = () => {
