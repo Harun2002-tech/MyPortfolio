@@ -22,6 +22,7 @@ function Contact() {
     setLoading(true);
 
     try {
+      // ⚠️ የተስተካከለ ሊንክ፡ ከባክአንድ ጋር እንዲስማማ የመጨረሻው /contact እንዲጠፋ ተደርጓል
       const response = await fetch(
         "https://myportfolio-9x7u.onrender.com/api/contact",
         {
@@ -36,7 +37,7 @@ function Contact() {
       const data = await response.json();
 
       if (data.success) {
-        // Success notification
+        // መልዕክቱ በተሳካ ሁኔታ ሲላክ
         toast.success("Message received, thank you! 📧", {
           position: "top-right",
           autoClose: 5000,
@@ -44,7 +45,7 @@ function Contact() {
           progressClassName: "custom-progress",
         });
 
-        // Reset form
+        // ፎርሙን ባዶ ማድረጊያ (Reset)
         setFormData({
           fullName: "",
           email: "",
@@ -53,7 +54,7 @@ function Contact() {
           message: "",
         });
       } else {
-        toast.error("An error occurred, please try again.");
+        toast.error(data.message || "An error occurred, please try again.");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -65,7 +66,7 @@ function Contact() {
 
   return (
     <section className="contact" id="contact">
-      {/* ToastContainer is required for notifications to appear */}
+      {/* ኖቲፊኬሽኑ እንዲታይ ይህ ኮንቴነር መኖር አለበት */}
       <ToastContainer />
 
       <h2 className="heading">
@@ -116,6 +117,7 @@ function Contact() {
           required
         ></textarea>
 
+        {/* ሰርቨሩ ምላሽ እስከሚሰጥ ድረስ በተኑ እምቢ እንዲል disabled ተደርጓል */}
         <button type="submit" className="btn" disabled={loading}>
           {loading ? "Sending..." : "Send Message"}
         </button>
