@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import db from "../config/firebase";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -22,43 +24,42 @@ function Contact() {
     setLoading(true);
 
     try {
-      // ⚠️ የተስተካከለ ሊንክ፡ ከባክአንድ ጋር እንዲስማማ የመጨረሻው /contact እንዲጠፋ ተደርጓል
-      const response = await fetch(
-        "https://myportfolio-9x7u.onrender.com/api/contact",
+      await addDoc(collection(db, "contacts"), {
+        fullName: formData.fullName,
+        email: formData.email,
+        mobile: formData.mobile,
+        subject: formData.subject,
+        message: formData.message,
+        createdAt: serverTimestamp(),
+      });
+
+      toast.success("Message sent successfully! I'll get back to you soon.", {
+        position: "top-right",
+        autoClose: 5000,
+        className: "custom-toast",
+        progressClassName: "custom-progress",
+      });
+
+      setFormData({
+        fullName: "",
+        email: "",
+        mobile: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error(
+        error?.code === "permission-denied"
+          ? "Access denied. Firebase rules may need updating."
+          : "Failed to send message. Please try again.",
         {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      const data = await response.json();
-
-      if (data.success) {
-        // መልዕክቱ በተሳካ ሁኔታ ሲላክ
-        toast.success("Message received, thank you! 📧", {
           position: "top-right",
           autoClose: 5000,
           className: "custom-toast",
           progressClassName: "custom-progress",
-        });
-
-        // ፎርሙን ባዶ ማድረጊያ (Reset)
-        setFormData({
-          fullName: "",
-          email: "",
-          mobile: "",
-          subject: "",
-          message: "",
-        });
-      } else {
-        toast.error(data.message || "An error occurred, please try again.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      toast.error("Could not connect to the server.");
+        }
+      );
     } finally {
       setLoading(false);
     }
@@ -66,7 +67,6 @@ function Contact() {
 
   return (
     <section className="contact" id="contact">
-      {/* ኖቲፊኬሽኑ እንዲታይ ይህ ኮንቴነር መኖር አለበት */}
       <ToastContainer />
 
       <h2 className="heading">
@@ -117,7 +117,6 @@ function Contact() {
           required
         ></textarea>
 
-        {/* ሰርቨሩ ምላሽ እስከሚሰጥ ድረስ በተኑ እምቢ እንዲል disabled ተደርጓል */}
         <button type="submit" className="btn" disabled={loading}>
           {loading ? "Sending..." : "Send Message"}
         </button>
