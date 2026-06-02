@@ -15,32 +15,26 @@ const saveContact = async (req, res) => {
     });
     await newContact.save();
 
-    // 2. Nodemailer transporter ማዘጋጀት
-    // Render ላይ Port 465 እና secure: true መጠቀም አስተማማኝ ነው
+    // 2. የBrevo (Sendinblue) Transporter ማዘጋጀት 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
+      host: "smtp-relay.brevo.com", // 👈 ወደ Brevo SMTP ተቀይሯል
+      port: 587,                    // Brevo የሚጠቀመው አስተማማኝ ፖርት
+      secure: false,                // ለፖርት 587 false መሆን አለበት
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS, // እዚህ ጋር App Password መሆኑን እርግጠኛ ሁን
-      },
-      tls: {
-        // ይህ ግንኙነቱ በጊዜ ገደብ እንዳይቋረጥ (Timeout እንዳይሆን) ይረዳል
-        rejectUnauthorized: false,
+        user: process.env.EMAIL_USER, // Brevo ላይ ያለህ ኢሜይል
+        pass: process.env.EMAIL_PASS, // ያንተ የ Brevo API Key (xkeysib...)
       },
     });
 
     // 3. የኢሜይል ይዘት
     const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
+      from: process.env.EMAIL_USER, // 👈 መላክ ያለበት ከተፈቀደለት የBrevo ኢሜይልህ ነው
+      to: process.env.EMAIL_USER,   // መልዕክቱ ለአንተ እንዲደርስህ
       subject: `New Portfolio Message: ${subject}`,
       html: `
           <div style="font-family: Arial, sans-serif; border: 1px solid #ddd; padding: 20px;">
-              <h2 style="color: #333;">New Message Received!</h2>
-              <p><b>From:</b> ${fullName}</p>
+              <h2 style="color: #333;">New Message Received From Portfolio!</h2>
+              <p><b>Name:</b> ${fullName}</p>
               <p><b>Email:</b> ${email}</p>
               <p><b>Phone:</b> ${mobile}</p>
               <p><b>Message:</b></p>
@@ -54,12 +48,11 @@ const saveContact = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "መልዕክትህ በተሳካ ሁኔታ ተቀምጧል፣ ኢሜይልም ደርሶኛል!",
+      message: "መልዕክትህ በተሳካ ሁኔታ ተቀምጧል፣ በBrevo በኩል ኢሜይል ደርሶኛል!",
     });
   } catch (error) {
-    console.error("Error Details:", error);
+    console.error("Brevo Error Details:", error);
 
-    // ዳታው MongoDB ላይ ሴቭ ሆኖ ኢሜይሉ ብቻ እምቢ ካለ ለተጠቃሚው ስህተት እንዳያሳይ ማድረግ ትችላለህ
     res.status(500).json({
       success: false,
       message: "ስህተት አጋጥሟል፣ እባክህ ድጋሚ ሞክር።",
