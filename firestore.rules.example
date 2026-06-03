@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Contact form: allow anonymous visitors to CREATE only (no read/update/delete).
+    match /contacts/{docId} {
+      allow create: if
+        request.resource.data.keys().hasAll([
+          'fullName', 'email', 'mobile', 'subject', 'message', 'createdAt'
+        ])
+        && request.resource.data.fullName is string
+        && request.resource.data.fullName.size() > 0
+        && request.resource.data.fullName.size() <= 120
+        && request.resource.data.email is string
+        && request.resource.data.email.matches('.*@.*\\..*')
+        && request.resource.data.email.size() <= 254
+        && request.resource.data.message is string
+        && request.resource.data.message.size() > 0
+        && request.resource.data.message.size() <= 5000
+        && request.resource.data.mobile is string
+        && request.resource.data.mobile.size() <= 30
+        && request.resource.data.subject is string
+        && request.resource.data.subject.size() <= 200
+        && request.resource.data.createdAt == request.time;
+
+      allow read, update, delete: if false;
+    }
+  }
+}
