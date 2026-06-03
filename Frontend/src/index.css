@@ -100,7 +100,7 @@ span {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 2rem 9%;
+  padding: 1.5rem 9%; /* ሎጎውና ናቭባሩ ይበልጥ እንዲያምሩ padding ተስተካክሏል */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -109,11 +109,29 @@ span {
   backdrop-filter: blur(10px);
 }
 
+/* ለሎጎውና ለጽሑፉ ሊንክ መያዣ (Container) */
 .logo {
-  font-size: 2.6rem;
-  color: var(--text-color);
-  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem; /* በሎጎው ምስል እና በ"Harun Tech" ጽሑፍ መካከል ፍጹም የሆነ ክፍተት ይሰጣል */
   cursor: pointer;
+  text-decoration: none;
+}
+
+/* በሊንኩ ውስጥ ላለው ምስል (Image) የተሰጠ ስታይል */
+.logo img {
+  height: 50px; /* ሎጎው ከናቭባሩ ጋር በትክክል እንዲዋሃድ ቁመቱ ወደ 42px ተስተካክሏል */
+  width: auto; /* ስፋቱ ከቁመቱ ጋር እንዳይዛባ በራሱ ያስተካክለዋል */
+  object-fit: contain;
+}
+
+/* አዲስ ለጨመርነው "Harun Tech" ጽሑፍ የተሰጠ ውብ ስታይል */
+.logo span {
+  font-size: 2.2rem; /* የጽሑፉ መጠን */
+  color: var(--text-color);
+  font-weight: 700; /* ጽሑፉ ጎልቶ እንዲወጣ (Bold እንዲሆን) */
+  white-space: nowrap; /* በሞባይልም ቢሆን ጽሑፉ ተቆርጦ ወደ ታች እንዳይወርድ ይከላከላል */
+  letter-spacing: 0.5px;
 }
 
 .navbar {
@@ -140,6 +158,7 @@ span {
   cursor: pointer;
   display: none;
 }
+
 /* =========================================================
    4. HOME & SOCIAL MEDIA
 ========================================================= */
@@ -406,7 +425,7 @@ span {
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  background: var(--main-color); /* ብርቱካናማ ቀለም */
+  background: var(--main-color);
   border-radius: 0.8rem;
   border: none;
   cursor: pointer;
@@ -416,10 +435,12 @@ span {
 .footer-iconTop .scroll-btn:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow);
-  background: var(--white); /* ሲነካ ቀለሙ እንዲቀየር */
+  background: var(--white);
 }
-/* 10. RESPONSIVE */
 
+/* =========================================================
+   9. RESPONSIVE MEDIA QUERIES
+========================================================= */
 @media (max-width: 1200px) {
   html {
     font-size: 58%;
@@ -617,8 +638,12 @@ span {
     margin-bottom: 4rem;
   }
 
-  .logo {
-    font-size: 2.2rem;
+  .logo span {
+    font-size: 1.8rem; /* በትንሽ ስልክ ጽሑፉ መጠኑን በትንሹ ያስተካክላል */
+  }
+
+  .logo img {
+    height: 35px; /* በትንሽ ስልክ ሎጎው ትንሽ ያንሳል */
   }
 
   .home-content h1 {

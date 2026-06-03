@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5"; // ሜኑው ሲከፈት እንዲታይ (አማራጭ)
-
+import myLogo from "../Components/image/logo.png"; // የሎጎህን ትክክለኛ አድራሻ (path) እዚህ ጋር አስተካክለው
 function Header() {
   const [isActive, setIsActive] = useState(false);
 
@@ -12,7 +12,7 @@ function Header() {
   return (
     <header className="header">
       <a href="#Home" className="logo">
-        Portfolio
+        <img src={myLogo} alt="Logo" />
       </a>
 
       {/* የአይኮን ለውጥ፡ ሲከፈት 'X' ምልክት እንዲሆን */}
