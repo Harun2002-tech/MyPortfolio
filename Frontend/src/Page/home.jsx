@@ -50,7 +50,7 @@ const Home = () => {
             <SiTiktok />
           </a>
           <a
-            href="https://t.me/harunteck"
+            href="https://t.me/haruntech"
             style={{ "--i": 8 }}
             aria-label="Telegram"
             target="_blank"

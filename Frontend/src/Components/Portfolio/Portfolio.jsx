@@ -17,63 +17,75 @@ import Img4 from "../image/4.png";
 import Img5 from "../image/5.png";
 import Img6 from "../image/6.png";
 import Img7 from "../image/7.png";
+import Img8 from "../image/8.png";
+import Img9 from "../image/9.png";
 
 const projectData = [
-  {
-    title: "Automotive Service Management",
-    description:
-      "A comprehensive Full-Stack solution featuring a robust administrative dashboard to automate workflow and inventory for modern repair shops.",
-    image: Img1,
-    liveLink: "#",
-    video: "https://youtu.be/tiSi6g-QcR4",
-  },
   {
     title: "Masjid Management System",
     description:
       "A secure, user-friendly MERN stack platform for mosque administration, featuring automated donation tracking, event scheduling, and real-time community engagement tools.",
-    image: Img7, // Img7 ከላይ import መደረጉን እርግጠኛ ሁን
+    image: Img1, // Img7 ከላይ import መደረጉን እርግጠኛ ሁን
     liveLink: "https://ruhamaislamiccenter.vercel.app/",
-    video: null, // ቪዲዮ ካለህ ሊንኩን እዚህ ማስገባት ትችላለህ
   },
+  {
+    title: "Automotive Service Management",
+    description:
+      "A comprehensive Full-Stack solution featuring a robust administrative dashboard to automate workflow and inventory for modern repair shops.",
+    image: Img2,
+    liveLink: "https://autorex-app.vercel.app/",
+  },
+
+  {
+    title: "Artisan Café Experience (Ours Café)",
+    description:
+      "A modern, responsive café website showcasing the menu, ambiance, and ordering flow, designed to turn visitors into customers.",
+    image: Img3,
+    liveLink: "https://ours-cafe.vercel.app",
+  },
+  {
+    title: "Educational Community Hub (Q&A)",
+    description:
+      "A collaborative technical forum designed for developers to share knowledge, featuring secure login and complex database relationships.",
+    image: Img4,
+    liveLink: "https://harunqa.vercel.app/",
+  },
+  {
+    title: "Healthcare Management Platform (Bereka Health)",
+    description:
+      "A clean, patient-focused healthcare web app for presenting services, managing appointments, and giving clients easy access to care information.",
+    image: Img5,
+    liveLink: "https://bereka-health.vercel.app",
+  },
+
+  {
+    title: "Consignment Sales System",
+    description:
+      "A full-featured system for tracking consignment inventory, sales, and payouts, built to give merchants clear, real-time visibility into their business.",
+    image: Img6,
+    liveLink: "https://consignment-sales-system.vercel.app",
+  },
+  {
+    title: "Tourism & Travel Showcase (Grand Ethiopia)",
+    description:
+      "An engaging, responsive travel website highlighting Ethiopian destinations and experiences with a polished, visually rich interface.",
+    image: Img7,
+    liveLink: "https://grandethiopia.vercel.app",
+  },
+
   {
     title: "E-Commerce Ecosystem (Amazon Clone)",
     description:
       "A high-performance shopping platform integrated with secure payment processing, real-time cart functionality, and user authentication.",
-    image: Img2,
-    liveLink: "#",
-    video: "https://youtu.be/1D9Zxxs0Av0",
-  },
-  {
-    title: "Cinematic Streaming Platform (Netflix Clone)",
-    description:
-      "A dynamic media application leveraging TMDB API to deliver high-quality content previews with a fully responsive and interactive UI.",
-    image: Img3,
-    liveLink: "#",
-    video: "https://youtu.be/DZK6cfgz8f0",
-  },
-  {
-    title: "Educational Community Hub (Evangadi Q&A)",
-    description:
-      "A collaborative technical forum designed for developers to share knowledge, featuring secure login and complex database relationships.",
-    image: Img4,
-    liveLink: "#",
-    video: "https://youtu.be/icI2i_YeTqI",
-  },
-  {
-    title: "Premium Tech Retail UI (Apple Clone)",
-    description:
-      "A pixel-perfect, design-focused storefront replica emphasizing smooth animations and high-fidelity aesthetic consistency.",
-    image: Img5,
-    liveLink: "#",
-    video: "https://youtu.be/04N4NuHrpG0",
+    image: Img8,
+    liveLink: "https://amazone-clone-eight-nu.vercel.app/",
   },
   {
     title: "Professional Developer Portfolio",
     description:
       "A modern, optimized showcase of engineering expertise and creative design, built with performance and clean code in mind.",
-    image: Img6,
-    liveLink: "#",
-    video: null,
+    image: Img9,
+    liveLink: "https://harunahmed.vercel.app/",
   },
 ];
 
